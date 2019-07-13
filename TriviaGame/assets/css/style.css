@@ -1,0 +1,47 @@
+
+ .container {
+    position: relative;
+  }
+  
+  .center {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+
+  }
+  
+  img { 
+    width: 100%;
+    height: auto;
+    opacity: 0.3;
+  } 
+
+  
+  .question{
+    font-weight: 600;
+}
+.answers {
+    margin-bottom: 20px;
+}
+
+#startButton{
+    font-family: sans-serif;
+    font-size: 20px;
+    background-color: rgb(255, 145, 0);
+    color: #fff;
+    border: 0px;
+    border-radius: 3px;
+    padding: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#startButton:hover{
+    background-color: #3a8;
+}
+
+
+      
