@@ -38,17 +38,26 @@ var myQuestions = [
 	}
 ];
 
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit');
 
+var submitButton = $("#submitButton");
+var quizContainer = $('#quiz');
+var resultsContainer = $('#results');
+
+var output = [];
+showQuestions(myQuestions, quizContainer);
 generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+// generate quiz questions
+function generateQuiz(questions, quizContainer, resultsContainer, startButton) {
+//show question
+	
 
-function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+		
+		quizContainer.html( output.join(''));
+	}
 
 	function showQuestions(questions, quizContainer) {
+		// out answers
 		
-		var output = [];
 		var answers;
 
 		
@@ -60,7 +69,7 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
 			
 			for (letter in questions[i].answers) {
 
-				
+				//gives answer to question
 				answers.push(
 					'<label>'
 					+ '<input type="radio" name="question' + i + '" value="' + letter + '">'
@@ -76,52 +85,51 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
 				+ '<div class="answers">' + answers.join('') + '</div>'
 			);
 		}
-
-		
-		quizContainer.innerHTML = output.join('');
 	}
-
-
-	function showResults(questions, quizContainer, resultsContainer) {
+	function showResults() {
 
 		
-		var answerContainers = quizContainer.querySelectorAll('.answers');
+		var answerContainers = $('.answers');
 
 		
 		var userAnswer = '';
 		var numCorrect = 0;
 
 		
-		for (var i = 0; i < questions.length; i++) {
-
+		for (var i = 0; i < myQuestions.length; i++) {
 			
-			userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
-
+			
+			userAnswer = $('input[name=question' + i + ']:checked').val();;
+console.log(userAnswer)
 		
-			if (userAnswer === questions[i].correctAnswer) {
+			if (userAnswer === myQuestions[i].correctAnswer) {
 				
 				numCorrect++;
 
 				
-				answerContainers[i].style.color = 'lightgreen';
+				$(answerContainers[i]).css( "color", "green" );
 			}
 			
 			else {
 				
-				answerContainers[i].style.color = 'red';
+				$(answerContainers[i]).css( "color", "red" );
 			}
 		}
 
 	
-		resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+		resultsContainer.html(numCorrect + ' out of ' + myQuestions.length);
 	}
 
 	
-	showQuestions(questions, quizContainer);
+
 
 	
-	submitButton.onclick = function () {
-		showResults(questions, quizContainer, resultsContainer);
-	}
+	submitButton.on("click", showResults);
+	
+		
 
-}
+
+
+
+
+	
